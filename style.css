@@ -52,7 +52,7 @@ body {
 }
 
 .search {
-  flex: 0 0 3.7rem;
+  flex: 0 0 80%;
   display: flex;
   align-items: center;
   justify-content: center;

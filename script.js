@@ -32,7 +32,7 @@ const getAllCountryData = function () {
 };
 
 const renderCountry = function (data, region = '', className = '') {
-  totalCountry.textContent = `Toatal County: ${data.length}`;
+  totalCountry.textContent = `County: ${data.length}`;
   if (data.length === 0) return;
   else {
     data.forEach((data, index) => {

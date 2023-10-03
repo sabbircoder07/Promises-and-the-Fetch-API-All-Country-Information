@@ -40,6 +40,7 @@ body {
   color: #adb5bd;
 }
 .total__country {
+  margin-right: 5rem;
   font-size: 1.4rem;
 }
 .country__cta {

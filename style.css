@@ -31,7 +31,7 @@ body {
 }
 .country__header-title {
   margin-left: 5rem;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 .country__theme-mode {
   margin-right: 5rem;
@@ -40,7 +40,7 @@ body {
   color: #adb5bd;
 }
 .total__country {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 .country__cta {
   display: flex;
@@ -51,7 +51,7 @@ body {
 }
 
 .search {
-  flex: 0 0 40%;
+  flex: 0 0 3.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,7 +64,7 @@ body {
   background-color: #f4f2f2;
   border: none;
   padding: 1.4rem 7.2rem 1.4rem 4.2rem;
-  border-radius: 10rem;
+  border-radius: 5rem;
   width: 100%;
   margin-left: -3.4rem;
   margin-right: -6.6rem;

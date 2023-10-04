@@ -20,7 +20,7 @@ const getCountryDataAndNaibur = function () {
 getCountryDataAndNaibur();
 */
 
-//Promises and the Fetch API,Consuming Promises
+//Promises and the Fetch API,Consuming Promises All Country Information
 
 const request = fetch(`https://restcountries.com/v3.1/all`);
 console.log(request);
@@ -32,7 +32,7 @@ const getAllCountryData = function () {
 };
 
 const renderCountry = function (data, region = '', className = '') {
-  totalCountry.textContent = `County: ${data.length}`;
+  totalCountry.textContent = `Toatal County: ${data.length}`;
   if (data.length === 0) return;
   else {
     data.forEach((data, index) => {

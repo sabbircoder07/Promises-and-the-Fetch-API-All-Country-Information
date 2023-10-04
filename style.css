@@ -31,7 +31,7 @@ body {
 }
 .country__header-title {
   margin-left: 5rem;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 .country__theme-mode {
   margin-right: 5rem;
@@ -40,8 +40,7 @@ body {
   color: #adb5bd;
 }
 .total__country {
-  margin-right: 5rem;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 .country__cta {
   display: flex;
@@ -52,7 +51,7 @@ body {
 }
 
 .search {
-  flex: 0 0 100%;
+  flex: 0 0 80%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,8 +64,8 @@ body {
   background-color: #f4f2f2;
   border: none;
   padding: 1.4rem 7.2rem 1.4rem 4.2rem;
-  border-radius: 5rem;
-  width: 37.5rem;
+  border-radius: 10rem;
+  width: 35rem;
   margin-left: -3.4rem;
   margin-right: -6.6rem;
   transition: all 0.4s;
@@ -74,7 +73,7 @@ body {
 
 .search__input:focus {
   outline: none;
-  width: 100%;
+  width: 37.5rem;
   background-color: #f0eeee;
 }
 
@@ -194,6 +193,7 @@ body {
   cursor: pointer;
   transition: all 0.4s;
   position: relative;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 .country:hover {

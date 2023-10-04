@@ -25,10 +25,19 @@ getCountryDataAndNaibur();
 const request = fetch(`https://restcountries.com/v3.1/all`);
 console.log(request);
 
+const randerError = function (message) {
+  countriesContainer.insertAdjacentText('beforeend', message);
+  countriesContainer.style.opacity = 1;
+};
+
 const getAllCountryData = function () {
   fetch(`https://restcountries.com/v3.1/all`)
     .then(response => response.json())
-    .then(data => renderCountry(data));
+    .then(data => renderCountry(data))
+    .catch(err => {
+      alert(err);
+      randerError(`Something was wrong :${er.message}`);
+    });
 };
 
 const renderCountry = function (data, region = '', className = '') {

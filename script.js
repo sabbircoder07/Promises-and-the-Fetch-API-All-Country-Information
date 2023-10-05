@@ -3,49 +3,33 @@
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 const totalCountry = document.querySelector('.total__country');
+const searchCountry = document.querySelector('.search__input');
 
 ///////////////////////////////////////
 
-/*
-const getCountryDataAndNaibur = function () {
-  const request = new XMLHttpRequest();
-  request.open('GET', `https://restcountries.com/v3.1/all`);
-  request.send();
-  request.addEventListener('load', function () {
-    const [...data] = JSON.parse(this.responseText);
-    renderCountry(data);
-  });
-};
-
-getCountryDataAndNaibur();
-*/
-
 //Promises and the Fetch API,Consuming Promises All Country Information
-
-const request = fetch(`https://restcountries.com/v3.1/all`);
-console.log(request);
 
 const randerError = function (message) {
   countriesContainer.insertAdjacentText('beforeend', message);
-  countriesContainer.style.opacity = 1;
 };
 
-const getAllCountryData = function () {
-  fetch(`https://restcountries.com/v3.1/all`)
-    .then(response => response.json())
-    .then(data => renderCountry(data))
-    .catch(err => {
-      alert(err);
-      randerError(`Something was wrong :${er.message}`);
-    });
+const getJESONData = function (url, errMsg = 'Something Went Wrong') {
+  return fetch(url).then(response => {
+    if (!response.ok) {
+      throw new Error(`${errMsg} (${response.status})`);
+    }
+    return response.json();
+  });
 };
 
-const renderCountry = function (data, region = '', className = '') {
+const renderCountry = function (data, className = '') {
+  countriesContainer.innerHTML = '';
+  let html = '';
   totalCountry.textContent = `Toatal County: ${data.length}`;
   if (data.length === 0) return;
   else {
     data.forEach((data, index) => {
-      const html = `<article class="country ${className}">
+      html = `<article class="country ${className}">
   <img class="country__img" src="${data.flags.png}" />
   <div class="country__number"><span>${index + 1}</span></div>
   <div class="country__data">
@@ -67,9 +51,63 @@ const renderCountry = function (data, region = '', className = '') {
   </div>
 </article>`;
       countriesContainer.insertAdjacentHTML('beforeend', html);
-      countriesContainer.style.opacity = 1;
     });
   }
 };
 
+const getAllCountryData = function () {
+  searchCountry.value = '';
+  getJESONData('https://restcountries.com/v3.1/all', 'Country Not Found')
+    .then(data => renderCountry(data))
+    .catch(err => {
+      alert(err);
+      randerError(`Something was Wrong :${er.message} Try Again!!`);
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
+};
+
+const getSpecificCountryData = function (country) {
+  getJESONData(
+    `https://restcountries.com/v3.1/name/${country}`,
+    'Country Not Found'
+  )
+    .then(data => renderCountry(data))
+    .catch(err => {
+      alert(err);
+      randerError(`Something was Wrong :${er.message} Try Again!!`);
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
+};
+
+const getSpecificRegionCountryData = function (region) {
+  searchCountry.value = '';
+  getJESONData(
+    `https://restcountries.com/v3.1/region/${region}`,
+    'Country Not Found'
+  )
+    .then(data => renderCountry(data))
+    .catch(err => {
+      alert(err);
+      randerError(`Something was Wrong :${er.message} Try Again!!`);
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
+};
+
 getAllCountryData();
+
+searchCountry.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    const countryName = searchCountry.value.toLowerCase();
+    getSpecificCountryData(countryName);
+  }
+});
+
+//
+//getSpecificRegionCountryData('europe');

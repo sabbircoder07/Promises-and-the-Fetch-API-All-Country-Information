@@ -21,13 +21,21 @@ const getJESONData = function (url, errMsg = 'Something Went Wrong') {
     return response.json();
   });
 };
+let countryNameList = [];
+const countryArray = function (data) {
+  console.log(data);
+  data.forEach(data => {
+    countryNameList.push(data.name.common);
+  });
+  console.log(countryNameList);
+};
 
 const renderCountry = function (data, className = '') {
   countriesContainer.innerHTML = '';
   let html = '';
-  totalCountry.textContent = `Toatal County: ${data.length}`;
   if (data.length === 0) return;
   else {
+    totalCountry.textContent = `Toatal County: ${data.length}`;
     data.forEach((data, index) => {
       html = `<article class="country ${className}">
   <img class="country__img" src="${data.flags.png}" />
@@ -58,10 +66,13 @@ const renderCountry = function (data, className = '') {
 const getAllCountryData = function () {
   searchCountry.value = '';
   getJESONData('https://restcountries.com/v3.1/all', 'Country Not Found')
-    .then(data => renderCountry(data))
+    .then(data => {
+      renderCountry(data);
+      countryArray(data);
+    })
     .catch(err => {
       alert(err);
-      randerError(`Something was Wrong :${er.message} Try Again!!`);
+      randerError(`Something was Wrong :${err.message} Try Again!!`);
     })
     .finally(() => {
       countriesContainer.style.opacity = 1;
@@ -76,7 +87,7 @@ const getSpecificCountryData = function (country) {
     .then(data => renderCountry(data))
     .catch(err => {
       alert(err);
-      randerError(`Something was Wrong :${er.message} Try Again!!`);
+      randerError(`Something was Wrong :${err.message} Try Again!!`);
     })
     .finally(() => {
       countriesContainer.style.opacity = 1;
@@ -92,7 +103,7 @@ const getSpecificRegionCountryData = function (region) {
     .then(data => renderCountry(data))
     .catch(err => {
       alert(err);
-      randerError(`Something was Wrong :${er.message} Try Again!!`);
+      randerError(`Something was Wrong :${err.message} Try Again!!`);
     })
     .finally(() => {
       countriesContainer.style.opacity = 1;
@@ -104,10 +115,10 @@ getAllCountryData();
 searchCountry.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
     event.preventDefault();
+    countriesContainer.innerHTML = '';
     const countryName = searchCountry.value.toLowerCase();
     getSpecificCountryData(countryName);
   }
 });
 
-//
 //getSpecificRegionCountryData('europe');

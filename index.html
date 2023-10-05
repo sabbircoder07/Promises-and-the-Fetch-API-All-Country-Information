@@ -13,6 +13,7 @@
       <div class="country__header">
         <h3 class="country__header-title">Where in the world?</h3>
         <h1 class="total__country"></h1>
+        <div class="country__theme-mode">Dark Mode</div>
       </div>
       <div class="country__cta">
         <form class="search" action="#">
@@ -80,8 +81,19 @@
             </div>
           </button>
         </form>
+        <from>
+          <div class="region-select" style="width: 200px">
+            <select id="region">
+              <option value="0" selected>Filter by Region</option>
+              <option value="saab">Saab</option>
+              <option value="opel">Opel</option>
+              <option value="audi">Audi</option>
+            </select>
+          </div>
+        </from>
       </div>
       <div class="countries"></div>
+      <!-- <button class="btn-country">Where am I?</button> -->
       <div class="images"></div>
     </main>
   </body>

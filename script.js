@@ -4,6 +4,7 @@ const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 const totalCountry = document.querySelector('.total__country');
 const searchCountry = document.querySelector('.search__input');
+const regionOption = document.querySelector('#region');
 
 ///////////////////////////////////////
 
@@ -21,13 +22,27 @@ const getJESONData = function (url, errMsg = 'Something Went Wrong') {
     return response.json();
   });
 };
+
 let countryNameList = [];
+let regionListAllCountry = [];
+let regionList = [];
+
 const countryArray = function (data) {
-  console.log(data);
   data.forEach(data => {
     countryNameList.push(data.name.common);
   });
-  console.log(countryNameList);
+};
+
+const regionListArray = function (data) {
+  data.forEach(data => {
+    regionListAllCountry.push(data.region);
+  });
+  regionList = [...new Set(regionListAllCountry)];
+  regionList.forEach(region => {
+    const html = `
+    <option value="${region}">${region}</option>`;
+    regionOption.insertAdjacentHTML('beforeend', html);
+  });
 };
 
 const renderCountry = function (data, className = '') {
@@ -69,9 +84,9 @@ const getAllCountryData = function () {
     .then(data => {
       renderCountry(data);
       countryArray(data);
+      regionListArray(data);
     })
     .catch(err => {
-      alert(err);
       randerError(`Something was Wrong :${err.message} Try Again!!`);
     })
     .finally(() => {
@@ -86,7 +101,6 @@ const getSpecificCountryData = function (country) {
   )
     .then(data => renderCountry(data))
     .catch(err => {
-      alert(err);
       randerError(`Something was Wrong :${err.message} Try Again!!`);
     })
     .finally(() => {
@@ -102,7 +116,6 @@ const getSpecificRegionCountryData = function (region) {
   )
     .then(data => renderCountry(data))
     .catch(err => {
-      alert(err);
       randerError(`Something was Wrong :${err.message} Try Again!!`);
     })
     .finally(() => {
@@ -115,10 +128,49 @@ getAllCountryData();
 searchCountry.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
     event.preventDefault();
-    countriesContainer.innerHTML = '';
     const countryName = searchCountry.value.toLowerCase();
-    getSpecificCountryData(countryName);
+    if (countryName !== '') {
+      countriesContainer.innerHTML = '';
+      getSpecificCountryData(countryName);
+    } else {
+      getAllCountryData();
+    }
   }
 });
 
-//getSpecificRegionCountryData('europe');
+regionOption.addEventListener('change', function (event) {
+  event.preventDefault();
+  const region = regionOption.value.toLowerCase();
+  if (region !== '0') {
+    countriesContainer.innerHTML = '';
+    getSpecificRegionCountryData(region);
+  } else {
+    getAllCountryData();
+  }
+});
+
+const lotteryPromise = new Promise((resolve, reject) => {
+  console.log('Lottery Draw are happening');
+  setTimeout(() => {
+    if (Math.random() > 0.5) {
+      resolve('You are win the Game');
+    } else {
+      reject(new Error('You lose the game and lose your money.'));
+    }
+  }, 2000);
+});
+
+lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+
+const wait = function (seconds) {
+  return new Promise(resolve => {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+wait(2)
+  .then(() => {
+    console.log('I waited for 2 seconds');
+    return wait(1);
+  })
+  .then(() => console.log('I wated for 1 second.'));

@@ -26,12 +26,19 @@ body {
   justify-content: space-between;
   width: 100%;
   padding: 1.8rem 0;
-  border-bottom: 10px solid #f1f3f5;
   background-color: #f8f9fa;
 }
 .country__header-title {
   margin-left: 5rem;
   font-size: 1.6rem;
+}
+.country__header-current-location {
+  font-size: 1.6rem;
+  font-weight: 600;
+  background-color: #f1f3f5;
+  padding: 1rem 0;
+  width: 100%;
+  text-align: center;
 }
 .country__theme-mode {
   margin-right: 5rem;
@@ -63,9 +70,9 @@ body {
   color: #333333;
   background-color: #f4f2f2;
   border: none;
-  padding: 1.4rem 7.2rem 1.4rem 4.2rem;
+  padding: 2rem 7.2rem 2rem 4.2rem;
   border-radius: 10rem;
-  width: 35rem;
+  width: 42rem;
   margin-left: -3.4rem;
   margin-right: -6.6rem;
   transition: all 0.4s;
@@ -73,14 +80,14 @@ body {
 
 .search__input:focus {
   outline: none;
-  width: 37.5rem;
+  width: 45rem;
   background-color: #f0eeee;
 }
 
 .search__input::-webkit-input-placeholder {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   text-transform: uppercase;
-  letter-spacing: 5px;
+  letter-spacing: 4px;
   font-weight: 400;
   color: #999999;
 }
@@ -173,7 +180,7 @@ body {
   z-index: 9999;
 }
 .countries {
-  /* margin-bottom: 8rem; */
+  margin-bottom: 8rem;
   display: flex;
   gap: 3.2rem;
   flex-wrap: wrap;
@@ -298,44 +305,43 @@ body {
   box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.1);
 }
 
-select {
-  appearance: none;
+.region-list {
   background-color: transparent;
   border: none;
-  padding: 0 1em 0 0;
-  margin: 0;
+  margin: 0.5rem;
   width: 100%;
   font-family: inherit;
   font-size: 1.6rem;
   font-weight: 500;
   cursor: pointer;
   line-height: inherit;
+  color: #333333;
 }
 
-select::-ms-expand {
-  display: none;
+.region-list:focus-visible {
+  outline: none;
 }
 
+.select-selected {
+  background-color: DodgerBlue;
+}
+
+.region-list option {
+  width: 100%;
+  padding: 2rem;
+}
 .select {
   width: 100%;
   min-width: 25rem;
   max-width: 30rem;
-  border: 1px solid #777;
-  border-radius: 0.25em;
-  padding: 0.5em 0.5em;
-  font-size: 1.25rem;
+  border: 1px solid #f4f2f2;
+  border-radius: 10rem;
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
   cursor: pointer;
   line-height: 1.1;
-  background-color: #fff;
-  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
-}
-
-.select::after {
-  content: '';
-  width: 0.8em;
-  height: 0.5em;
-  background-color: #777;
-  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  background-color: #f4f2f2;
+  background-image: linear-gradient(to top, #f4f2f2, #f4f2f2 33%);
 }
 
 .select {
@@ -346,7 +352,7 @@ select::-ms-expand {
   grid-template-areas: 'select';
 }
 
-select,
+.region-list,
 .select:after {
   grid-area: select;
 }
@@ -359,7 +365,7 @@ select,
   justify-self: end;
 }
 
-select:focus + .focus {
+.region-list:focus + .focus {
   position: absolute;
   top: -1px;
   left: -1px;

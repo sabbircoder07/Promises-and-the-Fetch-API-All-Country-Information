@@ -1,6 +1,6 @@
 'use strict';
 
-const btn = document.querySelector('.btn-country');
+const btnReset = document.querySelector('.btn-reset');
 const countriesContainer = document.querySelector('.countries');
 const totalCountry = document.querySelector('.total__country');
 const searchCountry = document.querySelector('.search__input');
@@ -181,6 +181,10 @@ regionOption.addEventListener('change', function (event) {
     countriesContainer.innerHTML = '';
     getAllCountryData();
   }
+});
+
+btnReset.addEventListener('click', function (e) {
+  window.location.reload(true);
 });
 
 /*
